@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: model-server444444
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: api
+        image: python:3.9-slim
+        env:
+        - name: MODEL_VERSION
+          value: "v2" # <--- We will automate changing this!
