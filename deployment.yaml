@@ -2,13 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: model-server444444
+  namespace: ml-tools
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: model-server
   template:
+    metadata:
+      labels:
+        app: model-server
     spec:
       containers:
-      - name: api
-        image: python:3.9-slim
-        env:
-        - name: MODEL_VERSION
-          value: "v2" # <--- We will automate changing this!
+      - name: ml-model-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
